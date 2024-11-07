@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>University Publications</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Find University Publications</h1>
+  <form action="/results" method="POST">
+    <!-- Input box for university name -->
+    <input type="text" id="university-name" name="university_name" placeholder="Enter university name" autocomplete="off" required>
+    
+    <!-- Hidden input to store the selected institution ID -->
+    <input type="hidden" name="institution_id" id="institution-id">
+    
+    <!-- Suggestions box for autocomplete dropdown -->
+    <div id="autocomplete-suggestions" class="suggestions-box"></div>
+    
+    <!-- Submit button -->
+    <button type="submit">Go</button>
+  </form>
+
+  <!-- Link to the external JavaScript file -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
