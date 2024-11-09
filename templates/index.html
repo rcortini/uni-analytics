@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <title>University Publications</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body>
   <h1>Find University Publications</h1>
+  <h2>Original Version</h1>
   <form action="/results" method="POST">
     <!-- Input box for university name -->
     <input type="text" id="university-name" name="university_name" placeholder="Enter university name" autocomplete="off" required>
@@ -21,6 +23,10 @@
     <button type="submit">Go</button>
   </form>
 
+  <h2>New version</h2>
+  <p>Search for an University, select it and then click on the button below</p>
+  <button type="button" class="loadData-js">Click Me</button>
+  <div class="result"><canvas id="result"></canvas></div>
   <!-- Link to the external JavaScript file -->
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
