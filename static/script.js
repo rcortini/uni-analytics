@@ -48,5 +48,31 @@ document.addEventListener("DOMContentLoaded", function() {
         suggestionsBox.style.display = "none";
       }
     });
+    let inPageButtons=[...document.getElementsByClassName("loadData-js")];
+    inPageButtons.forEach(e=>e.addEventListener("click",loadData));
   });
   
+let loadData = async function(){
+	const institutionId = document.getElementById("institution-id").value;
+	const response = await fetch("https://api.openalex.org/works?filter=institutions.id:"+institutionId+"&group_by=publication_year&sort=key");
+	const json = await response.json();
+	const resultDiv = document.getElementById("result");
+	let publicationsPerYear= json.group_by;
+	publicationsPerYear=publicationsPerYear.filter(e=>e.key>="2000"&&e.key<"2024")
+	const xValues=publicationsPerYear.map(e=>e.key);//.sort();
+	const yValues=publicationsPerYear.map(e=>e.count);
+	const chart = new Chart("result",{
+		type:"line",
+		data:{
+			labels:xValues,
+			datasets: [{
+				backgroundColor:"rgba(255,255,255,0.0)",
+				borderColor: "rgba(0,0,255,1.0)",
+				data: yValues
+			}]
+		},
+		options:{
+			legend:{display:false}
+		}
+	});
+}
